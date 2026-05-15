@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shubu Arcade</title>
+
+<style>
+body{
+margin:0;
+background:#121212;
+font-family:Arial;
+color:white;
+text-align:center;
+}
+
+header{
+padding:20px;
+background:#1f1f1f;
+font-size:28px;
+font-weight:bold;
+}
+
+#score{
+font-size:30px;
+margin-top:20px;
+}
+
+#gameBtn{
+width:160px;
+height:160px;
+border-radius:50%;
+border:none;
+background:gold;
+font-size:30px;
+cursor:pointer;
+margin-top:40px;
+box-shadow:0 0 20px gold;
+transition: all 0.1s ease;
+}
+
+#gameBtn:hover{
+transform: scale(1.05);
+box-shadow:0 0 30px gold;
+}
+
+#gameBtn:active{
+transform: scale(0.95);
+}
+
+#adbox{
+margin:30px auto;
+width:320px;
+height:100px;
+background:#2c2c2c;
+display:flex;
+justify-content:center;
+align-items:center;
+border-radius:10px;
+}
+
+footer{
+margin-top:40px;
+padding:20px;
+background:#1f1f1f;
+}
+
+.reset-btn{
+margin-top:20px;
+padding:10px 20px;
+background:#ff6b6b;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+font-size:16px;
+}
+
+.reset-btn:hover{
+background:#ff5252;
+}
+</style>
+</head>
+
+<body>
+
+<header>🎮 Shubu Arcade</header>
+
+<div id="score">Score: 0</div>
+
+<button id="gameBtn">TAP</button>
+
+<button class="reset-btn" onclick="resetScore()">Reset</button>
+
+<div id="adbox">
+Google AdSense Ad Here
+</div>
+
+<footer>
+Play Games • Watch Ads • Enjoy
+</footer>
+
+<script>
+let score = 0;
+
+// Load score from localStorage
+window.onload = function(){
+  const savedScore = localStorage.getItem("arcadeScore");
+  if(savedScore){
+    score = parseInt(savedScore);
+    document.getElementById("score").innerHTML = "Score: " + score;
+  }
+}
+
+document.getElementById("gameBtn").onclick = function(){
+  score++;
+  document.getElementById("score").innerHTML = "Score: " + score;
+  
+  // Save score to localStorage
+  localStorage.setItem("arcadeScore", score);
+  
+  // Visual feedback
+  this.style.transform = "scale(0.95)";
+  setTimeout(() => {
+    this.style.transform = "scale(1)";
+  }, 100);
+}
+
+function resetScore(){
+  score = 0;
+  document.getElementById("score").innerHTML = "Score: 0";
+  localStorage.removeItem("arcadeScore");
+}
+</script>
+
+</body>
+</html>
